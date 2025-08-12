@@ -26,3 +26,16 @@ replay_pid*
 # Archivos y carpetas de IntelliJ IDEA
 .idea/
 *.iml
+
+# Maven build folder
+target/
+
+# Gradle build folder
+build/
+
+# Spring Boot logs folder (si usas logs separados)
+logs/
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
