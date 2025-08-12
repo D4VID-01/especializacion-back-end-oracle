@@ -1,5 +1,6 @@
 package com.aluracursos.screenmatch.principal;
 
+import com.aluracursos.screenmatch.model.DatosEpisodio;
 import com.aluracursos.screenmatch.model.DatosSerie;
 import com.aluracursos.screenmatch.model.DatosTemporadas;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
@@ -21,7 +22,7 @@ public class Principal {
     public void muestraElMenu(){
         System.out.println("Por favor, escribe el nombre de la Serie que desea buscar");
 
-        // Busca los datos generales sde las series
+        // Busca los datos generales de las series
         var nombreSerie = teclado.nextLine();
         var json = consumoApi.obtenerDatos(URL_BASE + nombreSerie.replace(" ", "+") + API_KEY);
         var datos = conversor.obtenerDatos(json, DatosSerie.class);
@@ -35,6 +36,17 @@ public class Principal {
             temporadas.add(datosTemporada);
         }
 
-        temporadas.forEach(System.out::println);
+//        temporadas.forEach(System.out::println);
+
+        // Mostrar solo el título de los episodios de las temporadas
+        /* for (int i = 0; i < datos.totalDeTemporadas(); i++) {
+            List<DatosEpisodio> episodiosTemporada = temporadas.get(i).episodios();
+            for (int j = 0; j < episodiosTemporada.size(); j++) {
+                System.out.println(episodiosTemporada.get(j).titulo());
+            }
+        }*/
+        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
+
+
     }
 }
